@@ -81,6 +81,53 @@ class ProductController extends Controller
         return $data;
     }
 
+    /**
+     * @OA\Post(
+     *      path="/api/v1/products",
+     *      tags={"Products"},
+     *      summary="Create new product", 
+     *      operationId="createProduct", 
+     *      security={
+     *          {"Bearer" : {}}
+     *      },
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="multipart/form-data",          
+     *              @OA\Schema(
+     *                   type="object",
+     *                   required={"title", "htmlContent", "productType", "vendor"},
+     *                   @OA\Property(
+     *                      property="title",
+     *                      type="string",
+     *                      description="Product title"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="htmlContent",
+     *                      type="string",
+     *                      description="Product content"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="productType",
+     *                      type="string",
+     *                      enum={"Food", "Drinks", "Electronic"},
+     *                      description="Product type"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="vendor",
+     *                      type="string",
+     *                      description="Vendor name"
+     *                  ) 
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200, 
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *      )
+     * )
+     */
     public function store(ProductStoreRequest $request)
     {
         $data = $request->all();
@@ -144,6 +191,63 @@ class ProductController extends Controller
     //     $product = $productQuery->find($id);
     //     return new ProductResource($product);
     // }
+
+    /**
+     * @OA\PUT(
+     *      path="/api/v1/products/{id}",
+     *      tags={"Products"},
+     *      summary="Update product", 
+     *      operationId="updateProduct", 
+     *      security={
+     *          {"Bearer" : {}}
+     *      },
+     *      @OA\Parameter(
+     *          required=true,
+     *          name="id",
+     *          in="path",
+     *          description="Product id", 
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",          
+     *              @OA\Schema(
+     *                   type="object",
+     *                   required={"title", "htmlContent", "productType", "vendor"},
+     *                   @OA\Property(
+     *                      property="title",
+     *                      type="string",
+     *                      description="Product title"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="htmlContent",
+     *                      type="string",
+     *                      description="Product content"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="productType",
+     *                      type="string",
+     *                      enum={"Food", "Drinks", "Electronic"},
+     *                      description="Product type"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="vendor",
+     *                      type="string",
+     *                      description="Vendor name"
+     *                  ) 
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200, 
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *      )
+     * )
+     */
 
     public function update(ProductUpdateRequest $request, Product $product)
     {

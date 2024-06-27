@@ -122,9 +122,112 @@
                         "Bearer": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Create a new collection",
+                "operationId": "createCollection",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "htmlContent"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Product title",
+                                        "type": "string"
+                                    },
+                                    "htmlContent": {
+                                        "description": "Product content",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             }
         },
         "/api/v1/collections/{id}": {
+            "put": {
+                "tags": [
+                    "Collections"
+                ],
+                "summary": "Update collection",
+                "operationId": "updateCollection",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Collections id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "htmlContent"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Product title",
+                                        "type": "string"
+                                    },
+                                    "htmlContent": {
+                                        "description": "Product content",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
             "delete": {
                 "tags": [
                     "Collections"
@@ -210,6 +313,67 @@
                         "Bearer": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Create new product",
+                "operationId": "createProduct",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "htmlContent",
+                                    "productType",
+                                    "vendor"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Product title",
+                                        "type": "string"
+                                    },
+                                    "htmlContent": {
+                                        "description": "Product content",
+                                        "type": "string"
+                                    },
+                                    "productType": {
+                                        "description": "Product type",
+                                        "type": "string",
+                                        "enum": [
+                                            "Food",
+                                            "Drinks",
+                                            "Electronic"
+                                        ]
+                                    },
+                                    "vendor": {
+                                        "description": "Vendor name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             }
         },
         "/api/v1/products/{id}": {
@@ -242,6 +406,78 @@
                         }
                     }
                 ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Update product",
+                "operationId": "updateProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Product id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "htmlContent",
+                                    "productType",
+                                    "vendor"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "Product title",
+                                        "type": "string"
+                                    },
+                                    "htmlContent": {
+                                        "description": "Product content",
+                                        "type": "string"
+                                    },
+                                    "productType": {
+                                        "description": "Product type",
+                                        "type": "string",
+                                        "enum": [
+                                            "Food",
+                                            "Drinks",
+                                            "Electronic"
+                                        ]
+                                    },
+                                    "vendor": {
+                                        "description": "Vendor name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Successful operation",

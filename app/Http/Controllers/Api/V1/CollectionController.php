@@ -73,7 +73,42 @@ class CollectionController extends Controller
         return CollectionResource::collection($collections);
     }
 
-
+        /**
+     * @OA\Post(
+     *      path="/api/v1/collections",
+     *      tags={"Collections"},
+     *      summary="Create a new collection", 
+     *      operationId="createCollection", 
+     *      security={
+     *          {"Bearer" : {}}
+     *      },
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="multipart/form-data",          
+     *              @OA\Schema(
+     *                   type="object",
+     *                   required={"title", "htmlContent"},
+     *                   @OA\Property(
+     *                      property="title",
+     *                      type="string",
+     *                      description="Product title"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="htmlContent",
+     *                      type="string",
+     *                      description="Product content"
+     *                  ),
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200, 
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *      )
+     * )
+     */
     public function store(CollectionStoreRequest $request)
     {
         $data = $request->all();
@@ -103,8 +138,51 @@ class CollectionController extends Controller
     // }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *      path="/api/v1/collections/{id}",
+     *      tags={"Collections"},
+     *      summary="Update collection", 
+     *      operationId="updateCollection", 
+     *      security={
+     *          {"Bearer" : {}}
+     *      },
+     *      @OA\Parameter(
+     *          required=true,
+     *          name="id",
+     *          in="path",
+     *          description="Collections id", 
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="application/x-www-form-urlencoded",          
+     *              @OA\Schema(
+     *                   type="object",
+     *                   required={"title", "htmlContent"},
+     *                   @OA\Property(
+     *                      property="title",
+     *                      type="string",
+     *                      description="Product title"
+     *                  ),
+     *                  @OA\Property(
+     *                      property="htmlContent",
+     *                      type="string",
+     *                      description="Product content"
+     *                  ),
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200, 
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *      )
+     * )
      */
+    
     public function update(CollectionUpdateRequest $request, Collection $collection)
     {
         $collection->update($request->all());
